@@ -12,7 +12,9 @@ def fileManipulator():
             rows.append(row)
 
     print(rows)
-
+    
+#  opening the second sheet to stores its data in a array to later find matches between sheet1 and sheet2 to save in a array
+  
     sheet2file = open('sheet2.csv')
     type(file)
     csvreader2 = csv.reader(sheet2file)
@@ -23,15 +25,18 @@ def fileManipulator():
 
     matches = []
 
-    for  row in rows:
+#   comparing the data between the two sheets and printing "MATCH FOUND" when a match is found
+    for row in rows:
         if str(row[21]) in rows_column_0_strs:
             print("MATCH FOUND")
             matches.append(row)
-
+            
+#   changing sheet ones matched row's cell 29 string value to N to display that it has been found & copy and pasted below
     for row in rows:
         if row in matches:
             row[29] = "N"
 
+#   rewriting all the original data and copy pasted matched rows to a final output file
     with open('data_part_1_output.csv', 'w', newline='') as csvfile:
         # creating a csv writer object
         csvwriter = csv.writer(csvfile)
@@ -41,14 +46,16 @@ def fileManipulator():
         type(file)
         csvreader_sheet2 = csv.reader(file)
         csvreader_sheet2_rows = []
+        
         for sheet2rowiteratorrow in csvreader_sheet2:
             csvreader_sheet2_rows.append(sheet2rowiteratorrow)
 
+        # replacing sheet2's matched rows cell 21 strring with its corresponding sheet 1's cell 1 string
         for matched_row in matches:
             for sheet2_row in csvreader_sheet2_rows:
                 if str(sheet2_row[0]) == str(matched_row[21]):
                     matched_row[21] = sheet2_row[1]
-                    print("changing matche key values")
+                    print("changing matched key values")
                     matched_row[29] = "Y"
                     print("changing matched rows back to y")
 
