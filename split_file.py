@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 
 def main():
-    chunk_size = 4  # lines
+    chunk_size = 50000  # lines
 
     def write_chunk(part, lines):
         # making multiple data part outputs with new numbers at the end to signify what fraction of the file it correlates to
         with open('data_part_'+ str(part) +'.csv', 'w') as f_out:
             f_out.write(header)
             f_out.writelines(lines)
-
+    # you can change the harcoded file path to anything that refers to first sheet of many records
     with open(r'C:\Users\jshar\Desktop\Sheet1.csv', 'r') as f:
         count = 0
         header = f.readline()
